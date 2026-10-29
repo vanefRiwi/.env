@@ -1,0 +1,36 @@
+
+# =============================================================================
+# DataMart ETL environment variables. To Copy this file: cp .env.example .env
+# The actual .env file is listed in .gitignore: to never commit credentials to the repository.
+# The values below are examples for local development: change them as needed.
+# =============================================================================
+
+# --- Airflow (image and permissions) -----------------------------------------
+AIRFLOW_IMAGE_NAME=apache/airflow:3.1.5
+# On Linux, set your UID (command: id -u) to avoid permission issues in logs/
+AIRFLOW_UID=50000
+
+# --- UI administrator account (http://localhost:8080) ------------------------
+_AIRFLOW_WWW_USER_USERNAME=airflow
+_AIRFLOW_WWW_USER_PASSWORD=airflow
+
+# --- Airflow metadata database -----------------------------------------------
+AIRFLOW_DB_USER=airflow
+AIRFLOW_DB_PASSWORD=airflow
+AIRFLOW_DB_NAME=airflow
+
+# --- Internal Airflow secrets -------------------------------------------------
+# Generate your own values with:
+# python -c "import secrets; print(secrets.token_urlsafe(32))"
+AIRFLOW_JWT_SECRET=bC6m01X3hZGocSG7Vdbk5zxlP6sOjoVHdW8C4uBqFRo
+AIRFLOW_API_SECRET_KEY=VGxOcrj3Cw-H7qIGASP0F0JUrbXaMkv8Ov2zll5QsJ8
+# Optional (encrypts Connection passwords in the metadata database). Generate with:
+# python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
+AIRFLOW_FERNET_KEY=XBJKj1SM-rst-rCctqsPSkOIqstNyD8vFH_0FcmEd0U=
+
+# --- Analytics repository (PostgreSQL DWH) -----------------------------------
+DWH_DB=datamart_dwh
+DWH_USER=dwh_user
+DWH_PASSWORD=airflow
+# Port exposed on the machine to query the DWH (psql, DBeaver, Power BI)
+DWH_HOST_PORT=5433
